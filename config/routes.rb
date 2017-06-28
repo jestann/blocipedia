@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-
-  get 'welcome/about'
-
+  devise_for :users
+  
+  root 'welcome#index'
+  get 'about' => 'welcome#about'
+  
+  # sets a sign-up and sign-in page scoped to user
+  devise_scope :user do
+    get 'sign_up' => 'devise/users#new'
+    get 'sign_in' => 'devise/sessions#new'
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

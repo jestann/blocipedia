@@ -50,6 +50,9 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
+  
+  # Prevent leaking password reset tokens in logs
+  config.log_level = :warn
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
@@ -76,4 +79,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  # config.action_mailer.default_url_options = { host: 'jess-blocipedia-app.herokuapp.com' }
 end
