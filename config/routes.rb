@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
-  devise_for :users
-  
   root 'welcome#index'
   get 'about' => 'welcome#about'
   
-  # sets a sign-up and sign-in page scoped to user
+  devise_for :users
+  # sets a sign-up and sign-in url
   devise_scope :user do
     get 'sign_up' => 'devise/users#new'
     get 'sign_in' => 'devise/sessions#new'
   end
+  
+  # authenticate :user do
+  #  resources :wikis, only: [:new, :create, :edit, :update, :destroy]
+  # end
+  # resources :wikis, only: [:index, :show]
+  resources :wikis
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
