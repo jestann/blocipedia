@@ -1,10 +1,9 @@
 class WikisController < ApplicationController
-  # tried replacing the below with route-aspected authentication routing, unsuccessfully
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :authorize_user, except: [:index, :show, :new, :create]
+  before_action :authorize_user
   
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -16,7 +15,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
+    @wiki = Wiki.new(wiki_params_create)
     @wiki.user = current_user
 
     if @wiki.save
@@ -34,8 +33,8 @@ class WikisController < ApplicationController
   
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.assign_attributes(wiki_params)
-    
+    @wiki.assign_attributes(wiki_params_update)
+
     if @wiki.save
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
@@ -60,15 +59,21 @@ class WikisController < ApplicationController
 
   private
   
-  def wiki_params
-    params.require(:wiki).permit(:title, :body)
+  def wiki_params_create
+    params.require(:wiki).permit(policy(Wiki).permitted_attributes_for_create)
+  end
+  
+  def wiki_params_update
+    params.require(:wiki).permit(policy(@wiki).permitted_attributes_for_update)
   end
     
   def authorize_user
-    wiki = Wiki.find(params[:id])
-    unless current_user == wiki.user
-      flash[:alert] = "You must be the wiki's owner to do that."
-      redirect_to wiki
+    if (wiki_id = params[:id])
+      wiki = Wiki.find(wiki_id)
+      authorize wiki
+    else
+      authorize Wiki # authorize Class instance
     end
   end
+  
 end

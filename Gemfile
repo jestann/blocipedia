@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.5'
 gem 'devise'
 gem 'bootstrap-sass'
-
+gem 'pundit'
+# gem 'strong_parameters'
 
 group :production do
    gem 'pg'

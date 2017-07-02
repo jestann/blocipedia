@@ -1,4 +1,3 @@
-<br>
 <div class="col-md-8">
     <div class="media">
         <div class="media-body">
@@ -6,8 +5,11 @@
                 <%= link_to wiki.title, wiki %>
             </h4>
             <small>
+                created by <%= wiki.user.name %>
+                <br>
                 <%= wiki.body[0..150] %>...
             </small>
+            <br><br>
         </div>
     </div>
 </div>

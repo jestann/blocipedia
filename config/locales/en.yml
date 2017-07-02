@@ -19,5 +19,15 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+# en:
+#  hello: "Hello world"
+  
 en:
-  hello: "Hello world"
+ pundit:
+   default: "I'm really sorry to say this, but you can't do that."
+   wiki_policy:
+    new?: "Sorry, you can't create wikis."
+    create?: "Sorry, but you can't create this kind of wiki."
+    edit?: "Sorry, you can't edit this wiki."
+    update?: "Sorry, but you can't edit something about this wiki."
+    delete?: "Sorry, but you really just cannot delete this wiki."

@@ -5,14 +5,22 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'devise'
+
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'devise'
+require 'pundit/rspec'
 require 'factory_girl_rails'
 
+# configure devise
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
 end
+
+# include pundit_matcher.rb formerly in support folder
+# below method fails to work
+# Dir[Rails.root.join("spec/support/*.rb")].each {|f| require f}
+
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

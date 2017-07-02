@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
+  has_many :wikis
+  
+  enum role: [:standard, :premium, :admin]
+  after_initialize { self.role ||= :standard }
+         
   protected
   def confirmation_required?
     false

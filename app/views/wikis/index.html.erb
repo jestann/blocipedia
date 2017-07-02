@@ -1,7 +1,9 @@
 <h1>All Wikis</h1>
 <div class="row">
     <%= render @wikis %>
-    <% if current_user %>
+    
+    <!-- below passes in class instance, defined WikiPolicy's :new? method to work with this use -->
+    <% if policy(Wiki).new? %>
         <div class="col-md-4">
             <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
         </div>
