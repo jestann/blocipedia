@@ -8,7 +8,6 @@ require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'devise'
-require 'pundit/rspec'
 require 'factory_girl_rails'
 
 # configure devise
@@ -17,9 +16,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
 end
 
-# include pundit_matcher.rb formerly in support folder
-# below method fails to work
-# Dir[Rails.root.join("spec/support/*.rb")].each {|f| require f}
+# using a custome matcher instead of the pundit default
+require 'pundit/rspec'
+require 'pundit_matcher'
 
 
 
