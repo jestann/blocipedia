@@ -5,7 +5,8 @@ gem 'rails', '4.2.5'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'pundit'
-gem 'faker'
+gem 'stripe'
+gem 'figaro'
 # gem 'strong_parameters'
 
 group :production do
@@ -34,7 +35,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'figaro'
 
 
 =begin
