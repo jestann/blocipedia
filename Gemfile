@@ -5,6 +5,7 @@ gem 'rails', '4.2.5'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'pundit'
+gem 'faker'
 # gem 'strong_parameters'
 
 group :production do

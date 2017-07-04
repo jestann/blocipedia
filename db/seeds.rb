@@ -1,21 +1,23 @@
-require 'random_data'
+require 'faker'
 
 11.times do
+    user_name = Faker::GameOfThrones.character
     User.create!(
-        name: RandomData.random_name,
-        email: RandomData.random_email,
-        password: RandomData.random_password,
-        confirmed_at: Date.today
+        name: user_name,
+        email: Faker::Internet.safe_email(user_name),
+        password: Faker::Internet.password(8, 12),
+        confirmed_at: Faker::Date.between(30.days.ago, Date.today)
     )
 end
 
 3.times do
+    premium_name = Faker::LordOfTheRings.character
     User.create!(
-        name: RandomData.random_name,
-        email: RandomData.random_email,
-        password: RandomData.random_password,
+        name: premium_name,
+        email: Faker::Internet.safe_email(premium_name),
+        password: Faker::Internet.password(8, 12),
         role: :premium,
-        confirmed_at: Date.today
+        confirmed_at: Faker::Date.between(30.days.ago, Date.today)
     )
 end
 
@@ -27,20 +29,45 @@ users = User.all
 # this doesn't work as User.where(role: :premium)
 premium_users = User.where(role: 1)
 
+# For later seeding with markdown, because Faker::Markdown is not yet released.
+# markdown_array = ['**', '*', '`', '```']
+
 30.times do
+    markdown_body = Faker::Hipster.paragraph
+    # for later seeding with markdown
+    4.times do
+    #   mark = markdown_array.sample
+    #   markdown_body += ' ' + '<br><br>'
+        markdown_body += ' '
+    #   markdown_body += mark
+        markdown_body += Faker::Hipster.paragraph
+    #   markdown_body += mark
+    end
     Wiki.create!(
         user: users.sample,
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph
+        title: Faker::Hipster.sentence,
+        body: markdown_body,
+        created_at: Faker::Date.between(30.days.ago, Date.today)
     )
 end
 
 10.times do
+    premium_md = Faker::Hipster.paragraph
+    # for later seeding with markdown
+    4.times do
+    #   mark = markdown_array.sample
+    #   premium_md += ' ' + '<br><br>'
+        premium_md += ' '
+    #   premium_md += mark
+        premium_md += Faker::Hipster.paragraph
+    #   premium_md += mark
+    end
     Wiki.create!(
         user: premium_users.sample,
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph,
-        private: true
+        title: Faker::Hipster.sentence,
+        body: premium_md,
+        private: true,
+        created_at: Faker::Date.between(30.days.ago, Date.today)
     )
 end
 
