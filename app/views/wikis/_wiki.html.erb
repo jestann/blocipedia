@@ -7,7 +7,7 @@
             <small>
                 created by <%= wiki.user.name %>
                 <br>
-                <%= wiki.body[0..150] %>...
+                <%= @stripper.render(wiki.body[0..150]) %>...
             </small>
             <br><br>
         </div>

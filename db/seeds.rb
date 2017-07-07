@@ -25,23 +25,19 @@ end
 User.create!(name: 'Test User', email: 'test@t.com', password: 'testing', role: :premium, confirmed_at: Date.today)
 
 users = User.all
+premium_users = User.where(role: 1) # this doesn't work as User.where(role: :premium)
 
-# this doesn't work as User.where(role: :premium)
-premium_users = User.where(role: 1)
-
-# For later seeding with markdown, because Faker::Markdown is not yet released.
-# markdown_array = ['**', '*', '`', '```']
+# For seeding with markdown, because Faker::Markdown is not yet released.
+markdown_array = ['**', '*', '`', '```', '==', '~~', '_']
 
 30.times do
     markdown_body = Faker::Hipster.paragraph
-    # for later seeding with markdown
     4.times do
-    #   mark = markdown_array.sample
-    #   markdown_body += ' ' + '<br><br>'
-        markdown_body += ' '
-    #   markdown_body += mark
+        mark = markdown_array.sample
+        markdown_body += ' ' + '<br /><br />' + ' '
+        markdown_body += mark
         markdown_body += Faker::Hipster.paragraph
-    #   markdown_body += mark
+        markdown_body += mark
     end
     Wiki.create!(
         user: users.sample,
@@ -53,14 +49,12 @@ end
 
 10.times do
     premium_md = Faker::Hipster.paragraph
-    # for later seeding with markdown
     4.times do
-    #   mark = markdown_array.sample
-    #   premium_md += ' ' + '<br><br>'
-        premium_md += ' '
-    #   premium_md += mark
+        mark = markdown_array.sample
+        premium_md += ' ' + '<br /><br />' + ' '
+        premium_md += mark
         premium_md += Faker::Hipster.paragraph
-    #   premium_md += mark
+        premium_md += mark
     end
     Wiki.create!(
         user: premium_users.sample,

@@ -39,8 +39,8 @@ class ChargesController < ApplicationController
     # No refund to downgrade
     
     current_user.standard!
-    current_user.wikis.each { |wiki| wiki.private = false }
-    
+    current_user.wikis.update_all(private: false)
+
     flash[:notice] = "You have been downgraded to the free plan, #{current_user.name}."
     redirect_to edit_user_registration_path
   end

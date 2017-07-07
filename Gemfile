@@ -7,6 +7,7 @@ gem 'bootstrap-sass'
 gem 'pundit'
 gem 'stripe'
 gem 'figaro'
+gem 'redcarpet'
 # gem 'strong_parameters'
 
 group :production do

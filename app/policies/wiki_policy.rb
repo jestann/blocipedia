@@ -98,9 +98,9 @@ class WikiPolicy
       if user && user.admin?
         scope.all
       elsif user && user.premium?
-        scope.where(private: false)
+        # scope.where(private: false)
         # should be the below but won't work
-        # scope.where('user = ? OR private = ?', @user, false)
+        scope.where('user_id = ? OR private = ?', @user.id, false)
       else
         scope.where(private: false)
       end

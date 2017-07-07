@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role, :email, :password, :password_confirmation])
   end
+
+  # markdown rendering
+  require 'redcarpet'
+  require 'redcarpet/render_strip'
   
   # rescuing pundit authorization errors
   private
@@ -27,4 +31,5 @@ class ApplicationController < ActionController::Base
     flash[:alert] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
     redirect_to(request.referrer || root_path)
   end
+  
 end

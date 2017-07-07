@@ -4,10 +4,20 @@ class WikisController < ApplicationController
   
   def index
     @wikis = policy_scope(Wiki)
+    # strip markdown
+    @stripper = Redcarpet::Markdown.new(Redcarpet::Render::StripDown)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    # render markdown
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {
+      fenced_code_blocks: true, 
+      disable_indented_code_blocks: true,
+      underline: true, 
+      highlight: true, 
+      strikethrough: true
+    })
   end
 
   def new
