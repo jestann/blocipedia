@@ -1,9 +1,6 @@
 # I finally gave up inheriting from application policy ... because I thought using "record" was less readable
 # and I was just making it all from scratch anyway. And there are only wikis, no other resource.
 
-# Questions:
-# Why not @user and @wiki?
-
 class WikiPolicy
   attr_reader :user, :wiki
 
@@ -17,7 +14,7 @@ class WikiPolicy
   end
 
   def show?
-    wiki.private? ? ( (user.try(:premium?) && user == wiki.user) || user.try(:admin?) ) : true
+    wiki.private? ? ( (user.try(:premium?) && user == wiki.user) || (user && wiki.collaborators.include?(user)) || user.try(:admin?) ) : true
   end
 
   def create?
@@ -35,7 +32,7 @@ class WikiPolicy
   end
 
   def update?
-    user && ( wiki.private? ? ( (user.premium? && user == wiki.user) || user.admin? ) : true )
+    user && ( wiki.private? ? ( (user.premium? && user == wiki.user) || wiki.collaborators.include?(user) || user.admin? ) : true )
   end
   
   def edit?
@@ -95,16 +92,31 @@ class WikiPolicy
     end
 
     def resolve
+      wikis = []
       if user && user.admin?
-        scope.all
+        wikis = scope.all
       elsif user && user.premium?
-        # scope.where(private: false)
-        # should be the below but won't work
-        scope.where('user_id = ? OR private = ?', @user.id, false)
+        all_wikis = scope.all
+        all_wikis.each do |wiki|
+          if !wiki.private? || wiki.user == user || wiki.collaborators.include?(user)
+            wikis << wiki
+          end
+        end
+        # previous version of query, sans collaborations model
+        # scope.where('user_id = ? OR private = ?', @user.id, false)
+      elsif user
+        all_wikis = scope.all
+        all_wikis.each do |wiki|
+          if !wiki.private? || wiki.collaborators.include?(user)
+            wikis << wiki
+          end
+        end
       else
-        scope.where(private: false)
+        wikis = scope.where(private: false)
       end
+      wikis
     end
+    
   end
-  
+
 end

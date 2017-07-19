@@ -9,12 +9,16 @@ Rails.application.routes.draw do
   
   # Sets a sign-up and sign-in url
   devise_scope :user do
-    get 'sign_up' => 'devise/users#new'
+    get 'sign_up' => 'devise/registrations#new'
     get 'sign_in' => 'devise/sessions#new'
   end
   
-  # Wiki routes
+  # Wiki and collaboration routes
   resources :wikis
+  
+  resources :wikis, only: [] do
+    resources :collaborations, only: [:create, :destroy]
+  end
   
   # Stripe routes
   resources :charges, only: [:new, :create]

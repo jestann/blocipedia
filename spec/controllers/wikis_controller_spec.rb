@@ -9,7 +9,9 @@ RSpec.describe WikisController, type: :controller do
   let(:other_user) { create(:user) }
   let(:wiki) { create(:wiki, user: user) }
 
-
+  # the contexts presume no collaborations involved
+  # contexts should likely be removed and just be texted in wiki_policy_spec.rb
+  
   context "guest user" do
     describe "GET index" do
       it "returns http success" do

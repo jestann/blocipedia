@@ -5,8 +5,9 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <!-- doesn't update currently as need to modify the devise controller for this page -->
     <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', placeholder: '#{current_user.name}' %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'your name'%>
   </div>
 
   <br>
