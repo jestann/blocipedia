@@ -2,7 +2,7 @@
 
 _Collab is a collaboration app on Rails._
 
-Users can create free public and paid private collaboration spaces. Collab employes Devise and Pundit to implement differentiated collaborator permissions. It accepts payment for premium membership via Stripe. All collaboration spaces offer markdown rendering.
+Users can create free public and paid private collaboration spaces. Employes Devise and Pundit to implement differentiated collaborator permissions. Accepts payment for premium membership via Stripe. All spaces offer markdown rendering.
 
 #### Build Frameworks
 
@@ -20,7 +20,7 @@ Users can create free public and paid private collaboration spaces. Collab emplo
 - [Stripe](https://stripe.com/)
 - [RedCarpet](https://rubygems.org/gems/redcarpet/)
 
-Also employs the following dev dependencies for testing, debugging, and seeding the development and test databases.
+#### Dev Dependencies
 
 - [Shoulda](https://rubygems.org/gems/shoulda/)
 - [Faker](https://rubygems.org/gems/faker/)
@@ -29,16 +29,16 @@ Also employs the following dev dependencies for testing, debugging, and seeding 
 
 ### Project Objectives
 
-- Guests can find and view public collaboration spaces.
-- Users can register for a free account.
+- Guests can visit public collaboration spaces.
+- Guests can register for a free account.
 - Users can join, edit, and create public collaboration spaces.
-- Users can use markdown rendering to edit a collaboration space.
-- Users can upgrade to a premium account by paying via Stripe.
+- Users can edit a collaboration space in markdown.
+- Users can upgrade to a premium account via Stripe.
 - Premium users can create private collaboration spaces.
-- Premium users can add and remove collaborators from their private collaboration spaces.
-- Users who are collaborators on a private collaboration space can view and edit the space.
-- Premium users can downgrade to the free account.
-- Admin users can create, edit, and delete spaces and upgrade/downgrade users.
+- Premium users can add and remove collaborators for their spaces.
+- Users who are collaborators on a premium collaboration space can view and edit the space.
+- Premium users can downgrade to a free account.
+- Admin users can create, edit, and delete spaces and users and upgrade/downgrade.
 
 ### Setup
 
