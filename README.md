@@ -1,6 +1,8 @@
 # Collab
 
-Collab is a collaboration app on Rails. Users can create free public and paid private collaboration spaces. Collab employes Devise and Pundit to implement differentiated collaborator permissions. It accepts payment for premium membership via Stripe. All collaboration spaces offer markdown rendering.
+_Collab is a collaboration app on Rails._
+
+Users can create free public and paid private collaboration spaces. Collab employes Devise and Pundit to implement differentiated collaborator permissions. It accepts payment for premium membership via Stripe. All collaboration spaces offer markdown rendering.
 
 #### Build Frameworks
 
