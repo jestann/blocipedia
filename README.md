@@ -1,6 +1,6 @@
 # Collab
 
-A wiki collaboration app on Rails. Features free public and paid private collaboration spaces. Employs Devise and Pundit to implement differentiated collaborator permissions. Accepts payment via Stripe. Offers markdown rendering.
+Collab is a collaboration app on Rails. Users can create free public and paid private collaboration spaces. Collab employes Devise and Pundit to implement differentiated collaborator permissions. It accepts payment for premium membership via Stripe. All collaboration spaces offer markdown rendering.
 
 #### Build Frameworks
 
@@ -13,17 +13,17 @@ A wiki collaboration app on Rails. Features free public and paid private collabo
 - [Bcrypt](https://rubygems.org/gems/bcrypt/)
 - [Figaro](https://rubygems.org/gems/figaro/)
 - [SendGrid](https://sendgrid.com/)
-- [Devise]()
-- [Pundit]()
-- [Stripe]()
-- [RedCarpet]()
+- [Devise](https://rubygems.org/gems/devise/)
+- [Pundit](https://rubygems.org/gems/pundit/)
+- [Stripe](https://stripe.com/)
+- [RedCarpet](https://rubygems.org/gems/redcarpet/)
 
 Also employs the following dev dependencies for testing, debugging, and seeding the development and test databases.
 
-- [Shoulda]()
-- [Faker]()
-- [FactoryGirl]()
-- [Pry]()
+- [Shoulda](https://rubygems.org/gems/shoulda/)
+- [Faker](https://rubygems.org/gems/faker/)
+- [FactoryGirl](https://rubygems.org/gems/factory_girl/)
+- [Pry](https://rubygems.org/gems/pry/)
 
 ### Project Objectives
 
@@ -61,15 +61,15 @@ STRIPE_SECRET_KEY:
 
 ### Database Seeding
 
-This app uses the `Faker` gem with some additional custom methods for generating effective test data and seeding the database via `seeds.rb`.
+This app uses the `Faker` gem with custom methods for generating effective test data and seeding the database via `seeds.rb`.
 
 ### Authentication and Authorization
 
-This app uses `Devise` and `Pundit` gems for building authentication and for structuring customized authorization permissions for public and private spaces against ordinary and premium users. Custom `Pundit` authorization classes are included in `policies` under the `app` directory.
+This app uses `Devise` and `Pundit` gems for supporting authentication and building customized authorization permissions. Custom `Pundit` authorization classes are included in `policies` in the `app` directory.
 
 ### Testing
 
-This app includes a thorough set of tests, including differentiated authorization tests against `Pundit`, using `rspec` and `Shoulda` in the `spec` directory. Factories for test data generation using `FactoryGirl` are in the `factories` directory in the `spec` folder.
+This app includes a thorough set of tests using `rspec` and `Shoulda` in the `spec` directory. Factories for test data generation using `FactoryGirl` are in the `factories` directory in the `spec` folder.
 
 ### File Structure
 
@@ -137,7 +137,7 @@ This app follows the standard Rails file structure.
 
 ### Implementation
 
-A test-drive version of the app exists [here](https://jestann-collab.herokuapp.com).
+A working version of the app exists [here](https://jestann-collab.herokuapp.com).
 
 ### Case Study
 
@@ -147,14 +147,17 @@ A description of the project case study exists [here](http://jessbird.me/portfol
 
 #### Main
 
-<img alt="collab home 1" src="app/assets/images/readme/front-1.png" width="75%" align="center">
+<img alt="collab home" src="app/assets/images/readme/home.png" width="75%" align="center">
 
-<img alt="collab home 2" src="app/assets/images/readme/front-2.png" width="75%" align="center">
+#### Spaces
+
+<img alt="collab spaces" src="app/assets/images/readme/spaces.png" width="75%" align="center">
 
 #### Public Collaboration Space
 
-<img alt="collab wiki" src="app/assets/images/readme/public.png" width="75%" align="center">
+<img alt="collab public" src="app/assets/images/readme/public.png" width="75%" align="center">
 
-#### Private Collaboration Space
+#### Premium Collaboration Space
 
-<img alt="collab team" src="app/assets/images/readme/private.png" width="75%" align="center">
+<img alt="collab premium 1" src="app/assets/images/readme/premium-a.png" width="75%" align="center">
+<img alt="collab premium 2" src="app/assets/images/readme/premium-b.png" width="75%" align="center">
