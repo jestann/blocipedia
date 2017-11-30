@@ -1,15 +1,7 @@
-<div class="col-md-8">
-    <div class="media">
-        <div class="media-body">
-            <h4 class="media-heading">
-                <%= link_to wiki.title, wiki %>
-            </h4>
-            <small>
-                created by <%= wiki.user.name %>
-                <br>
-                <%= @stripper.render(wiki.body[0..150]) %>...
-            </small>
-            <br><br>
-        </div>
-    </div>
+<div class="list-item">
+    <h4><%= link_to wiki.title, wiki %></h4>
+    <small>
+        <p>created by <%= wiki.user.name %></p>
+        <p><%= @stripper.render(wiki.body[0..150]) %>...</p>
+    </small>
 </div>

@@ -1,7 +1,6 @@
 # Collab
 
-A wiki collaboration app on Rails. Collab features collaboration groups and varied authorization levels.
-Employs Devise and Pundit to implement differentiated collaborator permissions. Accepts payment via Stripe. Offers markdown rendering.
+A wiki collaboration app on Rails. Features free public and paid private collaboration spaces. Employs Devise and Pundit to implement differentiated collaborator permissions. Accepts payment via Stripe. Offers markdown rendering.
 
 #### Build Frameworks
 
@@ -17,47 +16,60 @@ Employs Devise and Pundit to implement differentiated collaborator permissions. 
 - [Devise]()
 - [Pundit]()
 - [Stripe]()
-- [Markdown]()
+- [RedCarpet]()
+
+Also employs the following dev dependencies for testing, debugging, and seeding the development and test databases.
+
+- [Shoulda]()
+- [Faker]()
+- [FactoryGirl]()
+- [Pry]()
 
 ### Project Objectives
 
-- Users can register for an account.
-- Users can view public posts and authorized private posts.
-- Users can post under a given topic.
-- Users can edit and delete their own posts.
-- Users can comment on posts.
-- Users can favorite posts and subscribe to email updates.
-- Users can upvote or downvote posts.
-- Admin users can create, edit, and delete topics, posts, and comments.
+- Guests can find and view public collaboration spaces.
+- Users can register for a free account.
+- Users can join, edit, and create public collaboration spaces.
+- Users can use markdown rendering to edit a collaboration space.
+- Users can upgrade to a premium account by paying via Stripe.
+- Premium users can create private collaboration spaces.
+- Premium users can add and remove collaborators from their private collaboration spaces.
+- Users who are collaborators on a private collaboration space can view and edit the space.
+- Premium users can downgrade to the free account.
+- Admin users can create, edit, and delete spaces and upgrade/downgrade users.
 
 ### Setup
 
 A development version of this app can be run by cloning the repository, installing dependencies, and then running the rails server.
 
 ```
-$ git clone https://github.com/jestann/rereadit.git <rereadit>
+$ git clone https://github.com/jestann/collab.git <collab>
 $ bundle install
 $ rails s
 ```
 
 ### Configuration Variables
 
-**Note:** This repository uses the file `application.yml` to initialize SendGrid. This file is not included in the repository.
+**Note:** This repository uses the file `application.yml` to initialize a Stripe account for accepting payment. This file is not included in the repository.
 
 To run this app, developers must create a `application.yml` file with the appropriate information as given in `application.example.yml`:
 
 ```
-SENDGRID_USERNAME:
-SENDGRID_PASSWORD:
+STRIPE_PUBLISHABLE_KEY:
+STRIPE_SECRET_KEY:
 ```
 
 ### Database Seeding
 
-This app includes a Ruby class in `random_data.rb` for generating effective test data and seeding the database via `seeds.rb`.
+This app uses the `Faker` gem with some additional custom methods for generating effective test data and seeding the database via `seeds.rb`.
+
+### Authentication and Authorization
+
+This app uses `Devise` and `Pundit` gems for building authentication and for structuring customized authorization permissions for public and private spaces against ordinary and premium users. Custom `Pundit` authorization classes are included in `policies` under the `app` directory.
 
 ### Testing
 
-This app includes a thorough set of tests using `rspec` in the `spec` directory.
+This app includes a thorough set of tests, including differentiated authorization tests against `Pundit`, using `rspec` and `Shoulda` in the `spec` directory. Factories for test data generation using `FactoryGirl` are in the `factories` directory in the `spec` folder.
 
 ### File Structure
 
@@ -71,9 +83,13 @@ This app follows the standard Rails file structure.
 │   │       └── ...
 │   ├── controllers
 │   │   └── ...
+│   ├── helpers
+│   │   └── ...
 │   ├── mailers
 │   │   └── ...
 │   ├── models
+│   │   └── ...
+│   ├── policies
 │   │   └── ...
 │   └── views
 │       └── ...
@@ -86,18 +102,33 @@ This app follows the standard Rails file structure.
 │   ├── seeds.rb
 │   └── ...
 ├── lib
-│   ├── random_data.rb
 │   └── ...
 ├── log
 │   └── ...
 ├── public
 │   └── ...
 ├── spec
+│   ├── controllers
+│   │   └── ...
+│   ├── factories
+│   │   └── ...
+│   ├── helpers
+│   │   └── ...
+│   ├── models
+│   │   └── ...
+│   ├── policies
+│   │   └── ...
+│   ├── views
+│   │   └── ...
+│   └── ...
+├── test
 │   └── ...
 ├── tmp
 │   └── ...
 ├── vendor
 │   └── ...
+├── .gitignore
+├── .rspec
 ├── config.ru
 ├── Gemfile
 ├── Rakefile
@@ -120,10 +151,10 @@ A description of the project case study exists [here](http://jessbird.me/portfol
 
 <img alt="collab home 2" src="app/assets/images/readme/front-2.png" width="75%" align="center">
 
-#### Wiki
+#### Public Collaboration Space
 
-<img alt="collab wiki" src="app/assets/images/readme/wiki.png" width="75%" align="center">
+<img alt="collab wiki" src="app/assets/images/readme/public.png" width="75%" align="center">
 
-#### Team
+#### Private Collaboration Space
 
-<img alt="collab team" src="app/assets/images/readme/team.png" width="75%" align="center">
+<img alt="collab team" src="app/assets/images/readme/private.png" width="75%" align="center">

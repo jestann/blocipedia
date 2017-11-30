@@ -3,7 +3,7 @@ class ChargesController < ApplicationController
   def new
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
-      description: "Blocipedia Premium - #{current_user.name}",
+      description: "Collab Premium - #{current_user.name}",
       amount: Amount.cost,
       amount_string: Amount.cost_string
     }
@@ -20,13 +20,13 @@ class ChargesController < ApplicationController
     Stripe::Charge.create(
       customer: customer.id,
       amount: Amount.cost,
-      description: "Blocipedia Premium - #{current_user.name}",
+      description: "Collab Premium - #{current_user.name}",
       currency: 'usd'
     )
     
     current_user.premium!
     
-    flash[:notice] = "You're now signed up for Blocipedia Premium, #{current_user.name}!"
+    flash[:notice] = "You're now signed up for Collab Premium, #{current_user.name}!"
     redirect_to edit_user_registration_path
    
     # Rescue and display Stripe errors
@@ -48,12 +48,12 @@ class ChargesController < ApplicationController
   private
   class Amount
     
-    # Blocipedia Premium upgrade cost in pennies
+    # Collab Premium upgrade cost in pennies
     def self.cost
       15_00
     end
     
-    # Blocipedia Premium upgrade cost in a pretty string
+    # Collab Premium upgrade cost in a pretty string
     def self.cost_string
       '$15'
     end

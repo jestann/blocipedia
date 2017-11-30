@@ -1,4 +1,23 @@
-<div class="jumbotron">
-    <h1>Collab</h1>
-    <p>Collab is a wiki collaboration space for any topic.</p>
+<div class="jumbotron main front container">
+    <div class="wide">
+        <h1>Collab</h1>
+        <p>Collab is a wiki collaboration space for any topic.</p>
+    </div>
+    <div class="row wide">
+        <div class="col-md-4">
+            <%= link_to wikis_path do %>
+                <%= image_tag image_path("color.jpg"), class: "medium-img img-a" %>
+            <% end %>
+        </div>
+        <div class="col-md-4">
+            <%= link_to wikis_path do %>
+                <%= image_tag image_path("pencils.jpg"), class: "medium-img img-a" %>
+            <% end %>
+        </div>
+        <div class="col-md-4">
+            <%= link_to wikis_path do %>
+                <%= image_tag image_path("gears.jpg"), class: "medium-img img-a" %>
+            <% end %>
+        </div>
+    </div>
 </div>

@@ -1,6 +1,6 @@
-<p>
+<div class="collaborators">
     <%= collaboration.user.name %>
     <% if policy(collaboration).destroy? %>
-        ---  <%= link_to "Remove Collaborator", [collaboration.wiki, collaboration], method: :delete, data: {confirm: 'Are you sure you want to remove this collaborator?'} %>
+        | <%= link_to "Remove", [collaboration.wiki, collaboration], method: :delete, data: {confirm: 'Are you sure you want to remove this collaborator?'} %>
     <% end %>
-</p>
+</div>

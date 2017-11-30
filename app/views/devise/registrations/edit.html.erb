@@ -1,73 +1,63 @@
-<br>
-<h3>Edit Your Profile Information</h3>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <!-- doesn't update currently as need to modify the devise controller for this page -->
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', placeholder: 'your name'%>
-  </div>
-
-  <br>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, class: 'form-control', autofocus: true %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <br><br>
-  <p>You can leave the fields below blank if you don't want to change your password.</p>
-  <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <em><%= @minimum_password_length %> characters minimum</em>
+<div class="container main form row">
+  <div class="col-md-7">
+    <h2>Edit Your Profile Information</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="field">
+        <!-- doesn't update currently as need to modify the devise controller for this page -->
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'your name'%>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', autofocus: true %>
+      </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+      <p>You can leave the fields below blank if you don't want to change your password.</p>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+        <% if @minimum_password_length %>
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+      </div>
+      <p>However, you do have to enter your current password to confirm any changes.</p>
+      <div class="field">
+        <%= f.label :current_password %>
+        <br>
+        <%= f.password_field :current_password, class: 'form-control', autocomplete: "off" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update Profile" %>
+      </div>
     <% end %>
+    <div class="links">
+      <% if current_user.standard? %>
+        <p>If you'd like to upgrade to Collab Premium, you can do that below.</p>
+        <p>Collab Premium users can create private spaces.</p>
+        <%= button_to "Upgrade to Premium", charges_path, method: :create %>
+      <% elsif current_user.premium? %>
+        <p>If you'd like to downgrade from Collab Premium, you can do that below.</p>
+        <p>If you downgrade to the free plan, all your existing private spaces will be made public.</p>
+        <%= link_to "Downgrade to Standard", charges_downgrade_path, data: { confirm: "Are you sure you want to downgrade?" } %>
+      <% elsif current_user.admin? %>
+        <p>You currently have administrative privileges on this account.</p>
+      <% end %>
+      <div class="links actions">
+        <p>If you'd like out for any reason, you can cancel your Collab account below.</p>
+          <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to leave us?" }, method: :delete %>
+          <%= button_to "Go Back", :back %>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <br>
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+  <div class="col-md-4">
+    <%= image_tag image_path("pencils"), class: "medium-img" %>
   </div>
-
-  <br><br>
-  However, you do have to enter your current password to confirm any changes.
-  <div class="field">
-    <%= f.label :current_password %>
-    <br>
-    <%= f.password_field :current_password, class: 'form-control', autocomplete: "off" %>
-  </div>
-
-  <br>
-  <div class="actions">
-    <%= f.submit "Update Profile" %>
-  </div>
-<% end %>
-
-
-<br><br>
-<% if current_user.standard? %>
-  <h4>If you'd like to upgrade to Blocipedia Premium, you can do that below.</h4>
-  <p>Blocipedia Premium users can create private wikis.</p>
-  <%= button_to "Upgrade to Premium", charges_path, method: :create %>
-<% elsif current_user.premium? %>
-  <h4>If you'd like to downgrade from Blocipedia Premium, you can do that below.</h4>
-  <p>If you downgrade to the free plan, all your existing private wikis will be made public.</p>
-  <%= link_to "Downgrade to Standard", charges_downgrade_path, data: { confirm: "Are you sure you want to downgrade?" } %>
-<% elsif current_user.admin? %>
-  <h4>You currently have administrative privileges on this account.</h4>
-<% end %>
-
-<br><br>
-<h4>If you'd like out for any reason, you can cancel your Blocipedia account below.</h4>
-<%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure you want to leave us?" }, method: :delete %>
-
-<br><br>
-<%= button_to "Go Back", :back %>
-<br>
+</div>

@@ -1,5 +1,5 @@
 <%= form_for [wiki, collaboration] do |f| %>
-    <h4>Add collaborators for this wiki.</h4>
+    <h3>Add collaborators for this space.</h3>
     <% if collaboration.errors.any? %>
         <div class="alert alert-danger">
             <h4><%= pluralize(collaboration.errors.count, "error") %>.</h4>
@@ -11,7 +11,7 @@
         </div>
     <% end %>
     <%= form_group_tag(collaboration.errors[:user_id]) do %>
-        <%= f.label :user_id %>
+        <%= f.label :user_id, "Enter User Id of Collaborator" %>
         <%= f.text_field :user_id, class: 'form-control', placeholder: "Enter user id of collaborator" %>
     <% end %>
     <!-- currently allows you to add yourself as a collaborator ;) -->

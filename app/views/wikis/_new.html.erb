@@ -11,20 +11,20 @@
     <% end %>
     <%= form_group_tag(wiki.errors[:title]) do %>
         <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title." %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter title." %>
     <% end %>
     <%= form_group_tag(wiki.errors[:body]) do %>
         <%= f.label :body %>
-        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body." %>
+        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter body." %>
     <% end %>
     <% if policy(wiki).permitted_to_create_private_wiki? %>
         <%= form_group_tag(wiki.errors[:private]) do %>
-            <p>Is this a private wiki? Then check the box below. All wikis are public by default.</p>
+            <p>Is this a private space? Then check the box below. All spaces are public by default.</p>
             <%= f.label :private %>
             <%= f.check_box :private, class: 'form-control' %>
         <% end %>
     <% else %>
-        <p>All wikis are public by default. To create a private wiki, sign up for a premium account.</p>
+        <p>All spaces are public by default. To create a private space, sign up for a premium account.</p>
     <% end %>
     <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
