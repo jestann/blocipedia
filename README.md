@@ -141,10 +141,6 @@ This app follows the standard Rails file structure.
 
 A working version of the app exists [here](https://jestann-collab.herokuapp.com).
 
-### Case Study
-
-A description of the project case study exists [here](http://jessbird.me/portfolio/collab.html).
-
 ### Visuals
 
 #### Main
